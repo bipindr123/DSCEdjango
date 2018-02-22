@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class publication(models.Model):
-    dept = models.CharField("Department(full name)",max_length=100)
+    dept = models.CharField(max_length=100)
     title = models.CharField(max_length=200, unique=True)
     author = models.CharField(max_length=100)
     Journal_name = models.CharField("Journal/Conference Name",max_length=100)
