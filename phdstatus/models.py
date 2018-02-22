@@ -6,7 +6,7 @@ class PhdStatus(models.Model):
     dept = models.CharField("Department", max_length=200)
     guide = models.CharField("Guide", max_length=200)
     uni = models.CharField("University where registered", max_length=200)
-    synopsys = models.CharField(max_length=50, choices=[('approved', 'approved'), ('not approved', 'not approved')])
+    synopsys = models.CharField(max_length=50,blank=True, choices=[('approved', 'approved'), ('not approved', 'not approved')])
     year = models.DateField("year of registration")
     status = models.CharField("status", max_length=50,
                               choices=[('Completed', 'Completed'), ('OnGoing', 'OnGoing')])
