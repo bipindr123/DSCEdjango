@@ -4,6 +4,7 @@ from .models import PhdStatus
 # Create your views here.
 
 all_statuses = PhdStatus.objects.all()
+all_years = PhdStatus.objects.order_by('-year__year').values('year__year').distinct()
 
 
 def index(request):
@@ -12,6 +13,7 @@ def index(request):
     total = all_statuses.count()
     context = {
         'all_statuses': all_statuses,
+        'all_years': all_years,
         'total': total,
     }
     return render(request, 'Phdstatus/index.html', context)
@@ -35,6 +37,7 @@ def bob(request):
     total = all_statuses.count()
     context = {
         'all_statuses': all_statuses,
+        'all_years': all_years,
         'total': total,
     }
     return render(request, 'Phdstatus/index.html', context)

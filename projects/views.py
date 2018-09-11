@@ -4,7 +4,8 @@ from django.db.models import *
 
 all_projects = FundedProject.objects.all()
 all_proposals = Proposal.objects.all()
-
+all_years = FundedProject.objects.order_by('-start_date__year').values('start_date__year').distinct()
+all_years2 = Proposal.objects.order_by('-submission_date__year').values('submission_date__year').distinct()
 # Create your views here.
 
 def index(request):
@@ -17,6 +18,7 @@ def projects(request):
     total_amount = all_projects.aggregate(Sum('amount_sactioned'))
     context = {
         'all_projects': all_projects,
+        'all_years': all_years,
         'total': total,
         'total_amount': total_amount,
     }
@@ -47,6 +49,7 @@ def search_projects(request):
         total_amount = all_projects.aggregate(Sum('amount_sactioned'))
         context = {
             'all_projects': all_projects,
+            'all_years': all_years,
             'total': total,
             'total_amount': total_amount
         }
@@ -59,6 +62,7 @@ def proposals(request):
     total_amount = all_proposals.aggregate(Sum('p_amount_applied'))
     context = {
         'all_proposals': all_proposals,
+        'all_years': all_years2,
         'total': total,
         'total_amount': total_amount
     }
@@ -89,6 +93,7 @@ def search_proposals(request):
         total_amount = all_proposals.aggregate(Sum('p_amount_applied'))
         context = {
             'all_proposals': all_proposals,
+            'all_years': all_years2,
             'total': total,
             'total_amount': total_amount
         }

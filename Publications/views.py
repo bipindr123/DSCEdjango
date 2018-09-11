@@ -3,7 +3,8 @@ from django.shortcuts import render
 from .models import publication
 
 all_publications = publication.objects.all()[:30]
-
+total_publications = publication.objects.count()
+all_years = publication.objects.order_by('-year__year').values('year__year').distinct()
 # Create your views here.
 def index(request):
     global all_publications
@@ -11,7 +12,8 @@ def index(request):
     total = all_publications.count()
     context = {
         'all_publications': all_publications,
-        'total': total,
+        'total': total_publications,
+        'all_years': all_years
     }
     return render(request, 'publications/index.html', context)
 
@@ -45,6 +47,7 @@ def bob(request):
     context = {
         'all_publications': all_publications,
         'total': total,
+        'all_years': all_years
     }
     return render(request, 'publications/index.html', context)
 
@@ -52,5 +55,6 @@ def bob(request):
 def print(request):
     context = {
         'all_publications': all_publications,
+        'all_years': all_years
     }
     return render(request, 'publications/print.html', context)

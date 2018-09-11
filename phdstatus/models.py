@@ -32,7 +32,7 @@ class WorkStatusTable(models.Model):
 
 
 class ComprehensiveTable(models.Model):
-    phdstatus = models.OneToOneField(PhdStatus, blank=True, null=True)
+    phdstatus = models.OneToOneField(PhdStatus, blank=True, null=True, on_delete=models.CASCADE)
     title = models.CharField("title", max_length=300, blank=True, null=True)
     status = models.CharField("status", max_length=50,
                               choices=[('Completed', 'Completed'), ('Not Completed', 'Not Completed')])
